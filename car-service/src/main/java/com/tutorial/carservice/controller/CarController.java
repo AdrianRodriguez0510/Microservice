@@ -39,15 +39,12 @@ public class CarController {
     @GetMapping("/byuser/{userId}")
     public ResponseEntity<List<Car>> getByUserId(@PathVariable("userId") int userId) {
         List<Car> cars = carService.byUserId(userId);
-        if (cars.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.ok(cars);
-        }
+      return ResponseEntity.ok(cars);
+
     }
 
     @PostMapping
-    public ResponseEntity<Car> saveCar(@RequestBody Car car){
+    public ResponseEntity<Car> save(@RequestBody Car car){
         Car carNew = carService.save(car);
         return ResponseEntity.ok(carNew);
     }
