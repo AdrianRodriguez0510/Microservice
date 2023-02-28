@@ -74,7 +74,7 @@ public class UserController {
         public ResponseEntity<Car> saveCar(@PathVariable("userId") int userId, @RequestBody Car car){
         User user = userService.getUserById(userId);
         if(user !=null) {
-            Car carnew = userService.saveCar(userId, car);
+            Car carnew = userService.save(userId, car);
             return ResponseEntity.ok(car);
         }
         else{
@@ -85,7 +85,7 @@ public class UserController {
     public ResponseEntity<Bike> saveBike(@PathVariable("userId") int userId, @RequestBody Bike bike){
         User user = userService.getUserById(userId);
         if(user !=null) {
-            Bike bikeNew = userService.saveBike(userId, bike);
+            Bike bikeNew = userService.save(userId, bike);
             return ResponseEntity.ok(bikeNew);
         }
         else{

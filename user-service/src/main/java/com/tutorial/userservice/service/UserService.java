@@ -18,10 +18,10 @@ public class UserService {
     UserRepository userRepository;
     @Autowired
     RestTemplate restTemplate;
-
-    BikeFeignClient bikeFeigClient;
-
-    CarFeignClient carFeigClient;
+    @Autowired
+    BikeFeignClient bikeFeignClient;
+    @Autowired
+    CarFeignClient carFeignClient;
     public List<User> getAll(){
         return userRepository.findAll();
     }
@@ -44,15 +44,15 @@ public class UserService {
         return bikes;
     }
 
-    public Car saveCar(int userId,Car car){
+    public Car save(int userId, Car car){
         car.setUserId(userId);
-        Car carNew = carFeigClient.save(car);
+        Car carNew = carFeignClient.save(car);
         return carNew;
     }
 
-    public Bike saveBike(int userId,Bike bike){
+    public Bike save(int userId, Bike bike){
         bike.setUserId(userId);
-        Bike bikeNew = bikeFeigClient.saveBike(bike);
+        Bike bikeNew = bikeFeignClient.save(bike);
         return bikeNew;
     }
 
@@ -72,7 +72,7 @@ public class UserService {
             else{
                 result.put("Cars", cars);
             }*/
-            List<Bike> bikes = bikeFeigClient.getBikes(userId);
+            List<Bike> bikes = bikeFeignClient.getBikes(userId);
             if(bikes.isEmpty()){
                 result.put("Bikes", "ese user no tiene bikes");
             }
